@@ -651,14 +651,71 @@
           </div>
           <div class="schedule-field">
             <label>📦 Modalidade</label>
-            <select id="schedMode">
+            <select id="schedMode" onchange="toggleEndereco()">
               <option value="">Selecionar</option>
               <option>Levar ao técnico</option>
-              <option>Coleta na residência</option>
+              <option value="coleta">Coleta na residência</option>
               <option>Remoto (online)</option>
             </select>
           </div>
         </div>
+
+        <!-- ENDEREÇO — aparece só quando Coleta selecionada -->
+        <div id="enderecoSection" style="display:none; margin-bottom:12px;">
+          <div style="background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.18); border-radius:8px; padding:9px 14px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+            <span style="font-size:14px;">🚗</span>
+            <p style="font-size:12px; color:rgba(200,230,255,0.6); line-height:1.4;">Retirada <strong style="color:#00d4ff;">gratuita</strong> até 3 km · R$ 4,50/km acima disso</p>
+          </div>
+          <div style="background:rgba(150,100,255,0.06); border:1px solid rgba(150,100,255,0.2); border-radius:10px; padding:12px 14px;">
+            <p style="font-size:11px; color:rgba(150,100,255,0.9); letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">📍 Endereço para coleta</p>
+            <div style="margin-bottom:10px;">
+              <div class="schedule-field">
+                <label>Rua / Avenida</label>
+                <input type="text" id="schedRua" placeholder="Ex: Av. Paulista, 1000">
+              </div>
+            </div>
+            <div class="schedule-row" style="margin-bottom:10px;">
+              <div class="schedule-field">
+                <label>Bairro</label>
+                <input type="text" id="schedBairro" placeholder="Ex: Bela Vista">
+              </div>
+              <div class="schedule-field">
+                <label>Nº / Complemento</label>
+                <input type="text" id="schedNum" placeholder="Apto, bloco...">
+              </div>
+            </div>
+            <div class="schedule-row" style="margin-bottom:8px;">
+              <div class="schedule-field">
+                <label>Cidade</label>
+                <input type="text" id="schedCidade" placeholder="São Paulo">
+              </div>
+              <div class="schedule-field">
+                <label>CEP</label>
+                <input type="text" id="schedCep" placeholder="00000-000" maxlength="9" oninput="mascararCep(this); resetDistancia()">
+              </div>
+            </div>
+
+            <!-- Botão calcular -->
+            <button type="button" id="btnCalc" onclick="calcularDistancia()" style="width:100%;margin-top:4px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);border-radius:8px;color:#00d4ff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px;cursor:pointer;transition:background 0.2s;">
+              📍 Calcular distância automaticamente
+            </button>
+
+            <!-- Resultado -->
+            <div id="taxaBox" style="display:none; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2); border-radius:8px; padding:10px 14px; margin-top:8px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <p style="font-size:11px; color:rgba(200,230,255,0.4); text-transform:uppercase; letter-spacing:1px;">Taxa de coleta</p>
+                  <p id="taxaDesc" style="font-size:12px; color:rgba(200,230,255,0.45); margin-top:2px;"></p>
+                </div>
+                <p id="taxaValor" style="font-size:22px; font-family:'Rajdhani',sans-serif; font-weight:700;"></p>
+              </div>
+            </div>
+            <div id="taxaErro" style="display:none; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.2); border-radius:8px; padding:9px 12px; margin-top:8px;">
+              <p style="font-size:12px; color:rgba(255,150,150,0.8);">⚠️ CEP não encontrado. Verifique e tente novamente.</p>
+            </div>
+          </div>
+        </div>
+
         <textarea class="schedule-obs" id="schedObs" placeholder="Observações (opcional): descreva o problema..."></textarea>
         <button class="schedule-confirm" onclick="confirmarAgendamento()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.984-1.413A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.115l-.29-.173-3.004.852.867-2.931-.19-.3A7.96 7.96 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z"/></svg>
@@ -749,30 +806,250 @@
     arrow.textContent = open ? '✕' : '↓';
   }
 
-  function confirmarAgendamento() {
-    const date = document.getElementById('schedDate').value;
-    const time = document.getElementById('schedTime').value;
-    const service = document.getElementById('schedService').value;
+  function toggleEndereco() {
     const mode = document.getElementById('schedMode').value;
-    const obs = document.getElementById('schedObs').value.trim();
+    const sec = document.getElementById('enderecoSection');
+    sec.style.display = mode === 'coleta' ? 'block' : 'none';
+    if (mode !== 'coleta') resetDistancia();
+  }
+
+  function mascararCep(el) {
+    let v = el.value.replace(/\D/g, '').slice(0, 8);
+    if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5);
+    el.value = v;
+  }
+
+  function resetDistancia() {
+    document.getElementById('taxaBox').style.display = 'none';
+    document.getElementById('taxaErro').style.display = 'none';
+    window._kmCalculado = null;
+    window._taxaCalculada = null;
+  }
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * 10) / 10;
+  }
+
+  async function calcularDistancia() {
+    const cep = document.getElementById('schedCep').value.replace(/\D/g, '');
+    const btn = document.getElementById('btnCalc');
+    if (cep.length !== 8) { alert('Digite um CEP válido com 8 dígitos.'); return; }
+
+    btn.textContent = '⏳ Calculando...';
+    btn.disabled = true;
+    resetDistancia();
+
+    // Morumbi — R. Leandro Teixeira, 115
+    const LAT_DENIS = -23.6097, LON_DENIS = -46.7172;
+
+    // Lookup por prefixo de CEP (5 dígitos) para São Paulo e Grande SP
+    const cepCoords = {
+      // São Paulo Capital — Centro
+      '01001':[-23.5489,-46.6388],'01002':[-23.5489,-46.6388],'01010':[-23.5429,-46.6350],
+      '01020':[-23.5429,-46.6440],'01100':[-23.5380,-46.6300],'01200':[-23.5280,-46.6420],
+      '01300':[-23.5400,-46.6550],'01400':[-23.5500,-46.6600],'01500':[-23.5380,-46.6180],
+      // Pinheiros / Vila Madalena / Itaim
+      '01600':[-23.5580,-46.6820],'01700':[-23.5530,-46.6900],'01800':[-23.5200,-46.6900],
+      '01900':[-23.5150,-46.6700],'02000':[-23.5050,-46.6239],'02100':[-23.5050,-46.6400],
+      '02200':[-23.4900,-46.6300],'02300':[-23.4700,-46.6100],'02400':[-23.4800,-46.6600],
+      '02500':[-23.4900,-46.6800],'02600':[-23.5100,-46.7100],'02700':[-23.5200,-46.7200],
+      '02800':[-23.4600,-46.7000],'02900':[-23.4700,-46.7200],'03000':[-23.5297,-46.5628],
+      '03100':[-23.5400,-46.5800],'03200':[-23.5550,-46.5950],'03300':[-23.5350,-46.6200],
+      '03400':[-23.5200,-46.5800],'03500':[-23.5100,-46.5400],'03600':[-23.5000,-46.5200],
+      '03700':[-23.5100,-46.4900],'03800':[-23.5300,-46.4700],'03900':[-23.5200,-46.4500],
+      '04000':[-23.5900,-46.6350],'04100':[-23.5950,-46.6200],'04200':[-23.6050,-46.6100],
+      '04300':[-23.6000,-46.6050],'04400':[-23.6200,-46.6600],'04500':[-23.5820,-46.6740],
+      '04600':[-23.6000,-46.6850],'04700':[-23.6200,-46.7000],'04800':[-23.6400,-46.6800],
+      '04900':[-23.6550,-46.6980],'05000':[-23.5650,-46.6980],'05100':[-23.5380,-46.6800],
+      '05200':[-23.5250,-46.7050],'05300':[-23.5400,-46.7100],'05400':[-23.5600,-46.7200],
+      '05500':[-23.5780,-46.7100],'05600':[-23.5950,-46.7100],'05601':[-23.5950,-46.7100],
+      '05610':[-23.6000,-46.7150],'05620':[-23.6050,-46.7150],'05630':[-23.6080,-46.7160],
+      '05640':[-23.6090,-46.7170],'05650':[-23.6097,-46.7172],'05660':[-23.6097,-46.7172],
+      '05661':[-23.6097,-46.7172],'05662':[-23.6097,-46.7172],'05663':[-23.6097,-46.7172],
+      '05670':[-23.6150,-46.7200],'05680':[-23.6200,-46.7250],'05690':[-23.6250,-46.7300],
+      '05700':[-23.6300,-46.7200],'05800':[-23.6400,-46.7100],'05900':[-23.6500,-46.7000],
+      // Zona Sul
+      '04001':[-23.5900,-46.6350],'04010':[-23.6050,-46.6500],'04020':[-23.6200,-46.6400],
+      '04030':[-23.6050,-46.6250],'04040':[-23.6100,-46.6200],'04050':[-23.5950,-46.6350],
+      '05001':[-23.5650,-46.6980],'06000':[-23.5322,-46.7919],
+      // Butantã / Vila Andrade / Jardim das Imbuias
+      '05500':[-23.5780,-46.7100],'05750':[-23.6350,-46.7300],'05760':[-23.6400,-46.7350],
+      // Grajaú / Interlagos / Cidade Dutra
+      '04900':[-23.6550,-46.6980],'04800':[-23.7050,-46.6900],'04700':[-23.6800,-46.6600],
+      // Santo Amaro / Campo Grande
+      '04700':[-23.6550,-46.7050],'04600':[-23.6450,-46.7300],
+      // Taboão da Serra
+      '06750':[-23.6025,-46.7572],'06760':[-23.6050,-46.7550],'06770':[-23.6100,-46.7600],
+      '06780':[-23.6150,-46.7650],'06790':[-23.6200,-46.7700],
+      // Osasco
+      '06000':[-23.5322,-46.7919],'06010':[-23.5280,-46.7900],'06020':[-23.5350,-46.7850],
+      '06030':[-23.5400,-46.7800],'06040':[-23.5180,-46.7920],'06050':[-23.5150,-46.7880],
+      '06060':[-23.5100,-46.7950],'06070':[-23.5050,-46.8000],'06080':[-23.5080,-46.8050],
+      '06090':[-23.5200,-46.8100],'06100':[-23.5300,-46.8050],'06110':[-23.5350,-46.8000],
+      // Barueri / Alphaville
+      '06400':[-23.5050,-46.8761],'06410':[-23.5100,-46.8700],'06420':[-23.5150,-46.8650],
+      '06430':[-23.5200,-46.8600],'06440':[-23.5250,-46.8550],'06450':[-23.5050,-46.8900],
+      '06460':[-23.4900,-46.8500],'06470':[-23.4950,-46.8700],'06480':[-23.4800,-46.8600],
+      // Carapicuíba
+      '06300':[-23.5228,-46.8358],'06310':[-23.5180,-46.8300],'06320':[-23.5250,-46.8400],
+      '06330':[-23.5300,-46.8450],'06340':[-23.5100,-46.8250],'06350':[-23.5350,-46.8500],
+      // Cotia
+      '06700':[-23.6031,-46.9197],'06710':[-23.6100,-46.9100],'06720':[-23.6200,-46.9000],
+      '06730':[-23.6300,-46.8900],'06740':[-23.5900,-46.9300],
+      // Embu das Artes
+      '06800':[-23.6489,-46.8508],'06810':[-23.6400,-46.8450],'06820':[-23.6550,-46.8550],
+      '06830':[-23.6600,-46.8600],'06840':[-23.6700,-46.8700],'06850':[-23.6800,-46.8600],
+      // Santana de Parnaíba / Jandira
+      '06530':[-23.5253,-46.9028],'06540':[-23.5200,-46.9100],'06550':[-23.5150,-46.9200],
+      '06560':[-23.4444,-46.9178],'06570':[-23.4500,-46.9100],
+      // Guarulhos
+      '07000':[-23.4543,-46.5333],'07010':[-23.4600,-46.5400],'07020':[-23.4650,-46.5450],
+      '07030':[-23.4700,-46.5500],'07040':[-23.4750,-46.5550],'07050':[-23.4800,-46.5600],
+      '07100':[-23.4500,-46.5200],'07200':[-23.4400,-46.5100],'07300':[-23.4300,-46.5000],
+      '07400':[-23.4200,-46.4900],'07500':[-23.4100,-46.4800],'07600':[-23.4200,-46.5500],
+      '07700':[-23.4300,-46.5400],'07800':[-23.4400,-46.5300],'07900':[-23.4500,-46.5400],
+      // ABC Paulista
+      '09000':[-23.6639,-46.5383],'09010':[-23.6700,-46.5400],'09020':[-23.6750,-46.5450],
+      '09030':[-23.6800,-46.5500],'09040':[-23.6850,-46.5550],'09050':[-23.6900,-46.5600],
+      '09100':[-23.7139,-46.5222],'09110':[-23.7200,-46.5280],'09120':[-23.7250,-46.5300],
+      '09130':[-23.7300,-46.5350],'09140':[-23.7350,-46.5400],'09150':[-23.7400,-46.5450],
+      '09200':[-23.6939,-46.5650],'09210':[-23.7000,-46.5700],'09220':[-23.7050,-46.5750],
+      '09300':[-23.7108,-46.4122],'09310':[-23.7150,-46.4200],'09320':[-23.7200,-46.4300],
+      '09400':[-23.6678,-46.4614],'09410':[-23.6700,-46.4700],'09420':[-23.6750,-46.4800],
+      '09500':[-23.6861,-46.6228],'09510':[-23.6900,-46.6300],'09520':[-23.6950,-46.6350],
+      // Mogi das Cruzes / Suzano
+      '08600':[-23.5228,-46.1897],'08700':[-23.5428,-46.3100],'08800':[-23.4867,-46.3486],
+      // Default SP capital
+      '08000':[-23.5505,-46.6333],'08100':[-23.5505,-46.5333],'08200':[-23.5505,-46.4833],
+      '08300':[-23.5005,-46.4333],'08400':[-23.5505,-46.3833],'08500':[-23.5505,-46.3333],
+    };
+
+    let lat1 = null, lon1 = null;
+    const prefix5 = cep.slice(0,5);
+    const prefix4 = cep.slice(0,4);
+    const prefix3 = cep.slice(0,3);
+
+    // 1. Busca por prefixo 5 dígitos
+    if (cepCoords[prefix5]) { [lat1, lon1] = cepCoords[prefix5]; }
+    else {
+      // Busca por prefixo mais próximo (4 ou 3 dígitos)
+      const chave = Object.keys(cepCoords).find(k => k.startsWith(prefix4)) ||
+                    Object.keys(cepCoords).find(k => k.startsWith(prefix3));
+      if (chave) [lat1, lon1] = cepCoords[chave];
+    }
+
+    // 2. Se não achou na tabela, tenta ViaCEP para pegar a cidade
+    if (!lat1) {
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (r.ok) {
+          const d = await r.json();
+          if (!d.erro) {
+            if (d.logradouro && !document.getElementById('schedRua').value) document.getElementById('schedRua').value = d.logradouro;
+            if (d.bairro && !document.getElementById('schedBairro').value) document.getElementById('schedBairro').value = d.bairro;
+            if (d.localidade && !document.getElementById('schedCidade').value) document.getElementById('schedCidade').value = d.localidade;
+            // Fallback por cidade
+            const cidadeCoords = {
+              'são paulo':[-23.5505,-46.6333],'guarulhos':[-23.4543,-46.5333],
+              'osasco':[-23.5322,-46.7919],'barueri':[-23.5050,-46.8761],
+              'carapicuíba':[-23.5228,-46.8358],'cotia':[-23.6031,-46.9197],
+              'taboão da serra':[-23.6025,-46.7572],'embu das artes':[-23.6489,-46.8508],
+              'santo andré':[-23.6639,-46.5383],'são bernardo do campo':[-23.6939,-46.5650],
+              'diadema':[-23.6861,-46.6228],'mauá':[-23.6678,-46.4614],
+              'ribeirão pires':[-23.7108,-46.4122],'suzano':[-23.5428,-46.3100],
+              'mogi das cruzes':[-23.5228,-46.1897],'santana de parnaíba':[-23.4444,-46.9178],
+              'jandira':[-23.5253,-46.9028],'itapevi':[-23.5486,-46.9356],
+            };
+            const cidade = (d.localidade||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            const match = Object.keys(cidadeCoords).find(k => cidade.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
+            if (match) [lat1, lon1] = cidadeCoords[match];
+          }
+        }
+      } catch(e) {}
+    } else {
+      // Preenche endereço via ViaCEP mesmo se já tiver coords
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (r.ok) {
+          const d = await r.json();
+          if (!d.erro) {
+            if (d.logradouro && !document.getElementById('schedRua').value) document.getElementById('schedRua').value = d.logradouro;
+            if (d.bairro && !document.getElementById('schedBairro').value) document.getElementById('schedBairro').value = d.bairro;
+            if (d.localidade && !document.getElementById('schedCidade').value) document.getElementById('schedCidade').value = d.localidade;
+          }
+        }
+      } catch(e) {}
+    }
+
+    if (!lat1) {
+      document.getElementById('taxaErro').style.display = 'block';
+      btn.textContent = '📍 Recalcular distância';
+      btn.disabled = false;
+      return;
+    }
+
+    const km = haversine(lat1, lon1, LAT_DENIS, LON_DENIS);
+    window._kmCalculado = km;
+    const KM_GRATIS = 3, TAXA = 4.5;
+    const taxa = km <= KM_GRATIS ? 0 : Math.round((km - KM_GRATIS) * TAXA * 100) / 100;
+    window._taxaCalculada = taxa;
+
+    document.getElementById('taxaDesc').textContent = km <= KM_GRATIS
+      ? `${km} km — coleta gratuita até 3 km`
+      : `${km} km · R$ 4,50/km após 3 km`;
+    document.getElementById('taxaValor').textContent = taxa === 0 ? 'Grátis' : `R$ ${taxa.toFixed(2).replace('.', ',')}`;
+    document.getElementById('taxaValor').style.color = taxa === 0 ? '#00ff99' : '#00d4ff';
+    document.getElementById('taxaBox').style.display = 'block';
+
+    btn.textContent = '📍 Recalcular distância';
+    btn.disabled = false;
+  }
+
+  function confirmarAgendamento() {
+    const date    = document.getElementById('schedDate').value;
+    const time    = document.getElementById('schedTime').value;
+    const service = document.getElementById('schedService').value;
+    const mode    = document.getElementById('schedMode').value;
+    const obs     = document.getElementById('schedObs').value.trim();
 
     if (!date || !time || !service || !mode) {
       alert('Por favor, preencha data, horário, serviço e modalidade.');
       return;
     }
+    if (mode === 'coleta' && window._kmCalculado == null) {
+      alert('Por favor, calcule a distância antes de confirmar.');
+      return;
+    }
 
     const [y, m, d] = date.split('-');
     const dateFormatted = `${d}/${m}/${y}`;
+    const modeLabel = mode === 'coleta' ? 'Coleta na residência' : mode;
 
     let msg = `Olá Denis! Gostaria de agendar um atendimento:\n\n`;
     msg += `📅 *Data:* ${dateFormatted}\n`;
     msg += `🕐 *Horário:* ${time}\n`;
     msg += `🔧 *Serviço:* ${service}\n`;
-    msg += `📦 *Modalidade:* ${mode}`;
-    if (obs) msg += `\n\n💬 *Obs:* ${obs}`;
+    msg += `📦 *Modalidade:* ${modeLabel}`;
 
-    const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/5511920919983?text=${encoded}`, '_blank');
+    if (mode === 'coleta') {
+      const rua    = document.getElementById('schedRua').value.trim();
+      const bairro = document.getElementById('schedBairro').value.trim();
+      const num    = document.getElementById('schedNum').value.trim();
+      const cidade = document.getElementById('schedCidade').value.trim() || 'São Paulo';
+      const cep    = document.getElementById('schedCep').value.trim();
+      if (rua) msg += `\n\n📍 *Endereço:* ${rua}${num ? ', ' + num : ''} — ${bairro} — ${cidade}`;
+      if (cep) msg += ` — CEP: ${cep}`;
+      const km   = window._kmCalculado;
+      const taxa = window._taxaCalculada;
+      msg += `\n📏 *Distância:* ${km} km`;
+      msg += taxa === 0 ? ` (coleta gratuita)` : `\n💳 *Taxa de coleta:* R$ ${taxa.toFixed(2).replace('.', ',')} (R$ 4,50/km após 3 km)`;    }
+
+    if (obs) msg += `\n\n💬 *Obs:* ${obs}`;
+    window.open(`https://wa.me/5511920919983?text=${encodeURIComponent(msg)}`, '_blank');
   }
 </script>
 
