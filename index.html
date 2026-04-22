@@ -3,530 +3,1071 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UpTech Store | Peças & Equipamentos</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Denis Fernandes | Suporte & Upgrade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --cyan:#00d4ff;--cyan-dim:rgba(0,212,255,0.12);
-  --bg:#020d1a;--bg2:#061428;--card:rgba(6,30,60,0.75);
-  --text:#e0f4ff;--dim:rgba(200,230,255,0.5);--border:rgba(0,212,255,0.18);
-  --green:#00e676;
-}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
-.topbar{background:rgba(0,212,255,0.08);border-bottom:1px solid var(--border);padding:7px 24px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:10;}
-.topbar-left{font-size:12px;color:var(--dim);}
-.topbar-right{display:flex;gap:20px;}
-.topbar-right a{font-size:12px;color:var(--dim);text-decoration:none;transition:color .2s;}
-.topbar-right a:hover{color:var(--cyan);}
-header{background:rgba(2,13,26,0.95);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;}
-.logo-icon{width:42px;height:42px;border-radius:10px;background:var(--cyan-dim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
-.logo-text{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;line-height:1;}
-.logo-text span{color:var(--cyan);}
-.logo-sub{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
-.search-wrap{flex:1;max-width:500px;position:relative;}
-.search-wrap input{width:100%;background:rgba(0,30,60,0.8);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 44px 10px 16px;outline:none;transition:border-color .2s;}
-.search-wrap input::placeholder{color:var(--dim);}
-.search-wrap input:focus{border-color:rgba(0,212,255,0.45);}
-.search-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--cyan);cursor:pointer;font-size:16px;}
-.cart-btn{background:var(--cyan-dim);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 18px;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;transition:all .2s;position:relative;flex-shrink:0;}
-.cart-btn:hover{border-color:var(--cyan);}
-.cart-badge{background:var(--cyan);color:#020d1a;border-radius:50%;width:18px;height:18px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;position:absolute;top:-6px;right:-6px;}
-nav{background:rgba(4,18,38,0.95);border-bottom:1px solid var(--border);padding:0 24px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;position:sticky;top:75px;z-index:99;}
-nav::-webkit-scrollbar{display:none;}
-.nav-btn{background:none;border:none;color:var(--dim);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:13px 16px;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;}
-.nav-btn:hover,.nav-btn.active{color:var(--cyan);border-bottom-color:var(--cyan);}
-main{max-width:1280px;margin:0 auto;padding:28px 24px;position:relative;z-index:1;}
-.banner{background:linear-gradient(135deg,rgba(0,80,160,0.4),rgba(0,212,255,0.1));border:1px solid var(--border);border-radius:16px;padding:32px 40px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;position:relative;}
-.banner::before{content:'';position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(0,212,255,0.15),transparent 70%);}
-.banner-title{font-family:'Rajdhani',sans-serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:8px;}
-.banner-title span{color:var(--cyan);}
-.banner-sub{font-size:15px;color:var(--dim);margin-bottom:20px;}
-.banner-btn{background:var(--cyan);color:#020d1a;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;padding:12px 28px;border-radius:10px;border:none;cursor:pointer;text-transform:uppercase;transition:opacity .2s;}
-.banner-btn:hover{opacity:.88;}
-.banner-icons{display:flex;gap:12px;position:relative;z-index:1;}
-.banner-icon{width:64px;height:64px;border-radius:14px;background:rgba(0,212,255,0.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-.section-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px;}
-.section-title::before{content:'';width:4px;height:22px;background:var(--cyan);border-radius:2px;display:block;}
-.section-count{font-size:12px;color:var(--dim);background:var(--cyan-dim);border:1px solid var(--border);border-radius:20px;padding:3px 12px;}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:40px;}
-.product-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,border-color .2s;cursor:pointer;display:flex;flex-direction:column;}
-.product-card:hover{transform:translateY(-3px);border-color:rgba(0,212,255,0.4);}
-.product-img{height:160px;background:rgba(0,30,60,0.6);display:flex;align-items:center;justify-content:center;font-size:56px;position:relative;border-bottom:1px solid var(--border);}
-.product-badge{position:absolute;top:10px;left:10px;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
-.badge-novo{background:rgba(0,230,118,0.15);border:1px solid rgba(0,230,118,0.3);color:#00e676;}
-.badge-usado{background:rgba(255,180,50,0.12);border:1px solid rgba(255,180,50,0.25);color:#ffb432;}
-.badge-oferta{background:rgba(255,68,68,0.15);border:1px solid rgba(255,68,68,0.3);color:#ff6666;}
-.product-info{padding:14px;flex:1;display:flex;flex-direction:column;}
-.product-cat{font-size:10px;color:var(--cyan);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px;}
-.product-name{font-size:14px;font-weight:500;line-height:1.3;margin-bottom:8px;flex:1;}
-.product-spec{font-size:11px;color:var(--dim);margin-bottom:10px;}
-.product-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
-.product-price{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--cyan);}
-.product-price-old{font-size:11px;color:var(--dim);text-decoration:line-through;display:block;margin-bottom:1px;}
-.add-btn{background:var(--cyan-dim);border:1px solid var(--border);border-radius:8px;color:var(--cyan);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:18px;}
-.add-btn:hover{background:rgba(0,212,255,0.25);border-color:var(--cyan);}
-/* CART */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:none;backdrop-filter:blur(4px);}
-.cart-overlay.open{display:flex;justify-content:flex-end;}
-.cart-panel{background:var(--bg2);border-left:1px solid var(--border);width:100%;max-width:460px;height:100vh;display:flex;flex-direction:column;animation:slideIn .25s ease;overflow-y:auto;}
-@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
-.cart-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--bg2);z-index:10;}
-.cart-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;}
-.cart-close{background:none;border:none;color:var(--dim);font-size:22px;cursor:pointer;}
-.cart-steps{display:flex;padding:0 24px;border-bottom:1px solid var(--border);}
-.cstep{flex:1;text-align:center;font-size:12px;color:var(--dim);padding:12px 4px;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;}
-.cstep.active{color:var(--cyan);border-bottom-color:var(--cyan);font-weight:500;}
-.cstep.done{color:var(--green);border-bottom-color:var(--green);}
-.step-content{display:none;padding:20px 24px;flex:1;}
-.step-content.active{display:block;}
-.cart-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);}
-.ci-icon{width:48px;height:48px;background:rgba(0,30,60,0.8);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.ci-info{flex:1;}
-.ci-name{font-size:13px;font-weight:500;margin-bottom:4px;line-height:1.3;}
-.ci-price{font-family:'Rajdhani',sans-serif;font-size:18px;color:var(--cyan);}
-.ci-controls{display:flex;align-items:center;gap:8px;margin-top:6px;}
-.qty-btn{background:var(--cyan-dim);border:1px solid var(--border);border-radius:6px;color:var(--text);width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;}
-.qty-num{font-size:14px;font-weight:500;min-width:20px;text-align:center;}
-.rm-btn{background:none;border:none;color:rgba(255,80,80,0.6);cursor:pointer;font-size:12px;margin-left:auto;}
-.cart-empty{text-align:center;padding:50px 20px;color:var(--dim);}
-/* FORM */
-.fsec-title{font-size:12px;font-weight:600;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;margin-top:20px;}
-.fsec-title:first-child{margin-top:0;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-.frow.full{grid-template-columns:1fr;}
-.ff label{display:block;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
-.ff input,.ff select,.ff textarea{width:100%;background:rgba(0,30,60,0.8);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;color-scheme:dark;}
-.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:rgba(0,212,255,0.5);}
-.ff select option{background:#061428;}
-.ff textarea{resize:none;height:65px;}
-.ff input::placeholder,.ff textarea::placeholder{color:rgba(200,230,255,0.25);}
-.cep-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:10px;}
-.cep-btn{background:var(--cyan-dim);border:1px solid var(--border);border-radius:8px;color:var(--cyan);font-size:12px;padding:9px 14px;cursor:pointer;white-space:nowrap;}
-.info-box{background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.18);border-radius:10px;padding:12px 16px;margin-bottom:12px;}
-.info-box p{font-size:13px;line-height:1.5;}
-.info-box p strong{color:var(--text);}
-/* PIX */
-.pix-center{text-align:center;}
-.pix-icon{font-size:44px;margin-bottom:10px;}
-.pix-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;margin-bottom:6px;}
-.pix-sub{font-size:13px;color:var(--dim);margin-bottom:18px;line-height:1.5;}
-.pix-key-box{background:rgba(0,30,60,0.8);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;margin-bottom:10px;}
-.pix-key-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
-.pix-key-val{font-family:'Rajdhani',sans-serif;font-size:17px;color:var(--cyan);}
-.copy-btn{background:var(--cyan-dim);border:1px solid var(--border);border-radius:8px;color:var(--cyan);padding:7px 12px;cursor:pointer;font-size:12px;font-weight:600;white-space:nowrap;}
-.pix-amount{font-family:'Rajdhani',sans-serif;font-size:38px;font-weight:700;color:var(--cyan);margin:12px 0;}
-.pix-steps{text-align:left;margin:12px 0 18px;}
-.pix-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;font-size:13px;color:var(--dim);}
-.pix-step-num{background:var(--cyan-dim);border:1px solid var(--border);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--cyan);flex-shrink:0;}
-.order-summary{background:rgba(0,30,60,0.5);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:14px;text-align:left;}
-.os-title{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
-.os-item{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;color:var(--dim);}
-.os-item span:last-child{color:var(--cyan);}
-.os-total{display:flex;justify-content:space-between;font-size:14px;font-weight:500;border-top:1px solid var(--border);padding-top:8px;margin-top:4px;}
-/* CART FOOTER */
-.cart-footer{padding:18px 24px;border-top:1px solid var(--border);background:var(--bg2);position:sticky;bottom:0;}
-.tot-row{display:flex;justify-content:space-between;margin-bottom:4px;}
-.tot-label{font-size:12px;color:var(--dim);}
-.tot-val{font-size:12px;}
-.tot-grand{font-family:'Rajdhani',sans-serif;font-size:26px;font-weight:700;color:var(--cyan);}
-.next-btn{width:100%;border:none;border-radius:12px;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;padding:14px;cursor:pointer;margin-top:12px;transition:opacity .2s;text-transform:uppercase;}
-.next-btn:hover{opacity:.88;}
-.btn-blue{background:linear-gradient(135deg,#0066cc,#00d4ff);color:#fff;}
-.btn-green{background:linear-gradient(135deg,#25d366,#1da851);color:#fff;}
-.back-btn{background:none;border:1px solid var(--border);border-radius:10px;color:var(--dim);font-size:13px;padding:10px;cursor:pointer;width:100%;margin-top:8px;transition:all .2s;}
-.back-btn:hover{border-color:var(--cyan);color:var(--text);}
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,212,255,0.15);border:1px solid rgba(0,212,255,0.35);border-radius:12px;color:var(--text);padding:12px 22px;font-size:14px;z-index:400;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-footer{border-top:1px solid var(--border);padding:24px;text-align:center;margin-top:40px;position:relative;z-index:1;}
-footer p{font-size:13px;color:var(--dim);}
-footer a{color:var(--cyan);text-decoration:none;}
-@media(max-width:640px){
-  .banner{flex-direction:column;gap:20px;padding:24px;}.banner-icons{display:none;}
-  .products-grid{grid-template-columns:repeat(2,1fr);}
-  .topbar{display:none;}header{padding:12px 16px;gap:12px;}
-  nav{padding:0 16px;top:69px;}main{padding:20px 16px;}
-  .frow{grid-template-columns:1fr;}
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cyan: #00d4ff;
+    --cyan-dim: rgba(0,212,255,0.15);
+    --cyan-glow: rgba(0,212,255,0.35);
+    --blue-deep: #020d1a;
+    --blue-mid: #061428;
+    --blue-card: rgba(6,30,60,0.7);
+    --text: #e0f4ff;
+    --text-dim: rgba(200,230,255,0.55);
+    --border: rgba(0,212,255,0.2);
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--blue-deep);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 60px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Radial glow behind content */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(0,80,180,0.25) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- HEADER ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  .avatar-ring {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid var(--cyan);
+    padding: 4px;
+    box-shadow: 0 0 24px var(--cyan-glow), 0 0 48px rgba(0,100,200,0.2);
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 18px var(--cyan-glow), 0 0 36px rgba(0,100,200,0.2); }
+    50%       { box-shadow: 0 0 32px rgba(0,212,255,0.55), 0 0 60px rgba(0,100,200,0.3); }
+  }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0a2a50, #04111f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .avatar-icon {
+    width: 48px;
+    height: 48px;
+    opacity: 0.9;
+  }
+
+  .avatar-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 22px;
+    height: 22px;
+    background: var(--cyan);
+    border-radius: 50%;
+    border: 2px solid var(--blue-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .avatar-badge svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+  }
+
+  .name span {
+    color: var(--cyan);
+  }
+
+  .handle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 4px 0 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    color: var(--cyan);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .bio {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 28px 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .divider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    opacity: 0.7;
+  }
+
+  /* ---- LINK BUTTONS ---- */
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--blue-card);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .link-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.07) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .link-btn:hover::before { opacity: 1; }
+
+  .link-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0,212,255,0.45);
+    background: rgba(6,30,70,0.85);
+  }
+
+  .link-btn:active { transform: scale(0.98); }
+
+  /* Stagger animation */
+  .link-btn:nth-child(1) { animation-delay: 0.1s; }
+  .link-btn:nth-child(2) { animation-delay: 0.18s; }
+  .link-btn:nth-child(3) { animation-delay: 0.26s; }
+  .link-btn:nth-child(4) { animation-delay: 0.34s; }
+  .link-btn:nth-child(5) { animation-delay: 0.42s; }
+
+  .btn-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .btn-icon.whatsapp { background: rgba(37,211,102,0.15); border: 1px solid rgba(37,211,102,0.3); }
+  .btn-icon.instagram { background: rgba(225,48,108,0.12); border: 1px solid rgba(225,48,108,0.25); }
+  .btn-icon.orcamento { background: rgba(0,212,255,0.12); border: 1px solid rgba(0,212,255,0.25); }
+  .btn-icon.servicos { background: rgba(100,150,255,0.12); border: 1px solid rgba(100,150,255,0.25); }
+  .btn-icon.email { background: rgba(255,200,50,0.1); border: 1px solid rgba(255,200,50,0.2); }
+
+  .btn-text {
+    flex: 1;
+  }
+
+  .btn-label {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text);
+    display: block;
+    line-height: 1.2;
+  }
+
+  .btn-sub {
+    font-size: 11.5px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    display: block;
+  }
+
+  .btn-arrow {
+    color: var(--text-dim);
+    font-size: 16px;
+    opacity: 0.5;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .link-btn:hover .btn-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  /* ---- SERVICES MINI GRID ---- */
+  .services-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: center;
+    margin: 32px 0 14px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .service-card {
+    background: var(--blue-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .service-card:nth-child(1) { animation-delay: 0.5s; }
+  .service-card:nth-child(2) { animation-delay: 0.55s; }
+  .service-card:nth-child(3) { animation-delay: 0.6s; }
+  .service-card:nth-child(4) { animation-delay: 0.65s; }
+
+  .service-icon { font-size: 20px; margin-bottom: 6px; display: block; }
+
+  .service-name {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text);
+    display: block;
+    line-height: 1.3;
+  }
+
+  .service-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    text-align: center;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-phone {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .footer-label {
+    font-size: 11.5px;
+    color: var(--text-dim);
+    letter-spacing: 0.3px;
+  }
+
+  .footer-credit {
+    margin-top: 28px;
+    font-size: 11px;
+    color: rgba(200,230,255,0.2);
+  }
+
+  /* ---- SCHEDULING PANEL ---- */
+  .btn-icon.agendar { background: rgba(150,100,255,0.12); border: 1px solid rgba(150,100,255,0.3); }
+  .btn-icon.apresentacao { background: rgba(255,180,50,0.1); border: 1px solid rgba(255,180,50,0.25); }
+
+  .schedule-panel {
+    display: none;
+    background: rgba(4,20,45,0.95);
+    border: 1px solid rgba(150,100,255,0.3);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 18px;
+    margin-top: -10px;
+    animation: slideDown 0.25s ease;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .schedule-panel.open { display: block; }
+
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .schedule-field label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 5px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .schedule-field input,
+  .schedule-field select {
+    width: 100%;
+    background: rgba(0,30,60,0.8);
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    color-scheme: dark;
+  }
+
+  .schedule-field input:focus,
+  .schedule-field select:focus {
+    border-color: rgba(150,100,255,0.6);
+  }
+
+  .schedule-field select option { background: #061428; }
+
+  .schedule-obs {
+    width: 100%;
+    background: rgba(0,30,60,0.8);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    resize: none;
+    height: 60px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .schedule-obs:focus { border-color: rgba(150,100,255,0.6); }
+  .schedule-obs::placeholder { color: rgba(200,230,255,0.3); }
+
+  .schedule-confirm {
+    width: 100%;
+    background: linear-gradient(135deg, #25d366, #1da851);
+    border: none;
+    border-radius: 9px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .schedule-confirm:hover { opacity: 0.9; transform: translateY(-1px); }
+  .schedule-confirm:active { transform: scale(0.98); }
+
+  .link-btn.agendar-btn {
+    border-radius: 12px;
+    transition: border-radius 0.2s, transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  .link-btn.agendar-btn.open {
+    border-radius: 12px 12px 0 0;
+    border-color: rgba(150,100,255,0.4);
+  }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <span class="topbar-left">🚚 Entrega via Sedex para todo o Brasil · Retirada no Morumbi/SP</span>
-  <div class="topbar-right">
-    <a href="https://wa.me/5511920919983" target="_blank">📱 (11) 92091-9983</a>
-    <a href="https://instagram.com/_denisfernandesti" target="_blank">Instagram</a>
-    <a href="https://denisfernandess.github.io/denis-ti/" target="_blank">Serviços de TI</a>
-  </div>
-</div>
+<div class="container">
 
-<header>
-  <div class="logo" onclick="filterCat('todos',document.querySelector('.nav-btn'))">
-    <div class="logo-icon">
-      <svg width="24" height="24" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="10" width="32" height="22" rx="2.5" stroke="#00d4ff" stroke-width="2" fill="rgba(0,80,160,0.3)"/>
-        <path d="M15 32l-6 6h30l-6-6" stroke="#00d4ff" stroke-width="2" stroke-linejoin="round"/>
-        <circle cx="24" cy="36" r="1.5" fill="#00d4ff"/>
-      </svg>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <!-- Laptop SVG icon -->
+          <svg class="avatar-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="10" width="32" height="22" rx="2.5" stroke="#00d4ff" stroke-width="2" fill="rgba(0,80,160,0.3)"/>
+            <path d="M15 32l-6 6h30l-6-6" stroke="#00d4ff" stroke-width="2" stroke-linejoin="round" fill="rgba(0,80,160,0.2)"/>
+            <rect x="13" y="14" width="22" height="14" rx="1" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+            <circle cx="24" cy="36" r="1.5" fill="#00d4ff"/>
+          </svg>
+        </div>
+      </div>
+      <div class="avatar-badge">
+        <svg viewBox="0 0 10 10" fill="none">
+          <path d="M2 5.5L4 7.5L8 3" stroke="#020d1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
+
+    <h1 class="name">Denis <span>Fernandes</span></h1>
+    <p class="handle">@_denisfernandesti</p>
+
+    <div class="tags">
+      <span class="tag">Técnico em TI</span>
+      <span class="tag">PCs & Notebooks</span>
+      <span class="tag">São Paulo</span>
+    </div>
+
+    <p class="bio">Formatação · Upgrade · Limpeza · Troca de peças · Remoção de vírus. Atendimento rápido e eficiente.</p>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- LINK BUTTONS -->
+  <div class="links">
+
+    <!-- UPTECH STORE -->
+    <a href="https://denisfernandess.github.io/uptechstore/" class="link-btn" target="_blank" rel="noopener" style="animation-delay:0.1s;">
+      <div class="btn-icon" style="background:rgba(0,212,255,0.12); border:1px solid rgba(0,212,255,0.3);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 6h18M16 10a4 4 0 01-8 0" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">UpTech Store 🛒</span>
+        <span class="btn-sub">Peças & Equipamentos · Loja Online</span>
+      </div>
+      <span class="btn-arrow">→</span>
+    </a>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/5511920919983" class="link-btn" target="_blank" rel="noopener">
+      <div class="btn-icon whatsapp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25d366">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.984-1.413A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.115l-.29-.173-3.004.852.867-2.931-.19-.3A7.96 7.96 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">Chamar no WhatsApp</span>
+        <span class="btn-sub">11 92091-9983 · Resposta rápida</span>
+      </div>
+      <span class="btn-arrow">→</span>
+    </a>
+
+    <a href="https://instagram.com/_denisfernandesti" class="link-btn" target="_blank" rel="noopener">
+      <div class="btn-icon instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#e1306c" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4.5" stroke="#e1306c" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="#e1306c"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">Instagram</span>
+        <span class="btn-sub">@_denisfernandesti · Posts e novidades</span>
+      </div>
+      <span class="btn-arrow">→</span>
+    </a>
+
+    <a href="https://wa.me/5511920919983?text=Ol%C3%A1%2C+gostaria+de+um+or%C3%A7amento" class="link-btn" target="_blank" rel="noopener">
+      <div class="btn-icon orcamento">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round"/>
+          <rect x="9" y="3" width="6" height="4" rx="1" stroke="#00d4ff" stroke-width="1.8"/>
+          <path d="M9 12h6M9 16h4" stroke="#00d4ff" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">Solicitar Orçamento</span>
+        <span class="btn-sub">Envio direto pelo WhatsApp</span>
+      </div>
+      <span class="btn-arrow">→</span>
+    </a>
+
+    <a href="#servicos" class="link-btn">
+      <div class="btn-icon servicos">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="#6496ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">Serviços Disponíveis</span>
+        <span class="btn-sub">Ver todos os serviços oferecidos</span>
+      </div>
+      <span class="btn-arrow">↓</span>
+    </a>
+
+    <!-- AGENDAMENTO -->
     <div>
-      <div class="logo-text">Up<span>Tech</span></div>
-      <div class="logo-sub">Store · Peças & Equipamentos</div>
-    </div>
-  </div>
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Buscar produtos..." oninput="searchProducts()">
-    <button class="search-btn">🔍</button>
-  </div>
-  <button class="cart-btn" onclick="openCart()">
-    🛒 Carrinho<span class="cart-badge" id="cartBadge">0</span>
-  </button>
-</header>
-
-<nav>
-  <button class="nav-btn active" onclick="filterCat('todos',this)">Todos</button>
-  <button class="nav-btn" onclick="filterCat('ssd-hd',this)">💾 SSD / HD</button>
-  <button class="nav-btn" onclick="filterCat('ram',this)">🧠 Memória RAM</button>
-  <button class="nav-btn" onclick="filterCat('carregador',this)">🔌 Carregadores</button>
-  <button class="nav-btn" onclick="filterCat('notebook',this)">💻 Notebooks</button>
-  <button class="nav-btn" onclick="filterCat('teclado-mouse',this)">⌨️ Teclado e Mouse</button>
-  <button class="nav-btn" onclick="filterCat('acessorio',this)">🎧 Acessórios</button>
-</nav>
-
-<main>
-  <div class="banner">
-    <div>
-      <p style="font-size:12px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">✦ UpTech Store · Oficial</p>
-      <h1 class="banner-title">Peças & Equipamentos<br>com <span>Procedência</span></h1>
-      <p class="banner-sub">Produtos novos e seminovos · Entrega Sedex para todo o Brasil</p>
-      <button class="banner-btn" onclick="filterCat('todos',document.querySelector('.nav-btn'))">Ver Produtos</button>
-    </div>
-    <div class="banner-icons">
-      <div class="banner-icon">💾</div>
-      <div class="banner-icon">🧠</div>
-      <div class="banner-icon">💻</div>
-    </div>
-  </div>
-  <div class="section-header">
-    <h2 class="section-title" id="sectionTitle">Todos os Produtos</h2>
-    <span class="section-count" id="sectionCount">0 produtos</span>
-  </div>
-  <div class="products-grid" id="productsGrid"></div>
-</main>
-
-<footer>
-  <p>UpTech Store · <a href="https://wa.me/5511920919983">(11) 92091-9983</a> · <a href="https://denisfernandess.github.io/denis-ti/">Serviços de TI</a></p>
-  <p style="margin-top:6px;font-size:11px;">Entrega via Sedex · Pagamento via Pix · Retirada no Morumbi/SP</p>
-</footer>
-
-<!-- CART OVERLAY -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
-  <div class="cart-panel">
-    <div class="cart-header">
-      <span class="cart-title" id="cartTitle">🛒 Carrinho</span>
-      <button class="cart-close" onclick="closeCart()">✕</button>
-    </div>
-    <div class="cart-steps">
-      <div class="cstep active" id="tab1">1. Produtos</div>
-      <div class="cstep" id="tab2">2. Entrega</div>
-      <div class="cstep" id="tab3">3. Pagamento</div>
-    </div>
-
-    <!-- STEP 1 -->
-    <div class="step-content active" id="step1">
-      <div id="itemsList"></div>
-      <div class="cart-empty" id="emptyMsg" style="display:none;">
-        <div style="font-size:44px;margin-bottom:12px;">🛒</div><p>Carrinho vazio</p>
-      </div>
-    </div>
-
-    <!-- STEP 2 -->
-    <div class="step-content" id="step2">
-      <div class="fsec-title">👤 Dados do destinatário</div>
-      <div class="frow full"><div class="ff"><label>Nome completo</label><input type="text" id="fNome" placeholder="Seu nome completo"></div></div>
-      <div class="frow">
-        <div class="ff"><label>WhatsApp</label><input type="text" id="fWpp" placeholder="(11) 99999-9999"></div>
-        <div class="ff"><label>CPF</label><input type="text" id="fCpf" placeholder="000.000.000-00"></div>
+      <div class="link-btn agendar-btn" id="agendarBtn" onclick="toggleAgendamento()" style="cursor:pointer;">
+        <div class="btn-icon agendar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="4" width="18" height="18" rx="2.5" stroke="#a064ff" stroke-width="1.8"/>
+            <path d="M3 9h18M8 2v4M16 2v4" stroke="#a064ff" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="12" cy="15" r="1.5" fill="#a064ff"/>
+            <path d="M8 15h.01M16 15h.01" stroke="#a064ff" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="btn-text">
+          <span class="btn-label">Agendar Atendimento</span>
+          <span class="btn-sub">Escolha data, horário e tipo de serviço</span>
+        </div>
+        <span class="btn-arrow" id="agendarArrow">↓</span>
       </div>
 
-      <div class="fsec-title">📦 Modalidade de entrega</div>
-      <div class="frow full" style="margin-bottom:14px;">
-        <div class="ff">
-          <select id="fMod" onchange="toggleMod()">
-            <option value="">Selecionar...</option>
-            <option value="sedex">Entrega via Sedex (todo o Brasil)</option>
-            <option value="retirada">Retirada no Morumbi/SP</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- SEDEX -->
-      <div id="secSedex" style="display:none;">
-        <div class="fsec-title">📍 Endereço de entrega</div>
-        <div class="cep-row">
-          <div class="ff"><label>CEP</label><input type="text" id="fCep" placeholder="00000-000" maxlength="9" oninput="mCep(this)"></div>
-          <button class="cep-btn" onclick="buscarCep()">🔍 Buscar</button>
-        </div>
-        <div class="frow full"><div class="ff"><label>Rua / Avenida</label><input type="text" id="fRua" placeholder="Ex: Av. Paulista"></div></div>
-        <div class="frow">
-          <div class="ff"><label>Número</label><input type="text" id="fNum" placeholder="Ex: 1000"></div>
-          <div class="ff"><label>Complemento</label><input type="text" id="fComp" placeholder="Apto, bloco..."></div>
-        </div>
-        <div class="frow">
-          <div class="ff"><label>Bairro</label><input type="text" id="fBairro" placeholder="Bairro"></div>
-          <div class="ff"><label>Cidade / UF</label><input type="text" id="fCidade" placeholder="São Paulo / SP"></div>
-        </div>
-        <div class="info-box" style="margin-top:10px;">
-          <p style="font-size:12px;color:var(--dim);">🚚 <strong>Frete Sedex</strong> calculado após confirmação do pedido conforme o CEP e peso dos produtos.</p>
-        </div>
-      </div>
-
-      <!-- RETIRADA -->
-      <div id="secRetirada" style="display:none;">
-        <div class="info-box">
-          <p><strong>📍 Local de retirada:</strong></p>
-          <p style="color:var(--dim);margin-top:4px;">R. Leandro Teixeira, 115 — Morumbi, São Paulo/SP</p>
-          <p style="color:var(--dim);margin-top:4px;">⏰ Agendar horário via WhatsApp após confirmação</p>
-        </div>
-      </div>
-
-      <div class="fsec-title" style="margin-top:16px;">💬 Observações</div>
-      <div class="ff"><textarea id="fObs" placeholder="Alguma informação adicional..."></textarea></div>
-    </div>
-
-    <!-- STEP 3 -->
-    <div class="step-content" id="step3">
-      <div class="pix-center">
-        <div class="pix-icon">💳</div>
-        <h2 class="pix-title">Pagamento via Pix</h2>
-        <p class="pix-sub">Copie a chave, pague e envie o comprovante pelo WhatsApp para confirmar seu pedido.</p>
-        <div class="order-summary" id="orderSum"></div>
-        <div class="pix-key-box">
-          <div>
-            <div class="pix-key-label">Chave Pix (Telefone)</div>
-            <div class="pix-key-val">11 92091-9983</div>
+      <div class="schedule-panel" id="schedulePanel">
+        <div class="schedule-row">
+          <div class="schedule-field">
+            <label>📅 Data</label>
+            <input type="date" id="schedDate">
           </div>
-          <button class="copy-btn" onclick="copiarPix()">📋 Copiar</button>
+          <div class="schedule-field">
+            <label>🕐 Horário</label>
+            <select id="schedTime">
+              <option value="">Selecionar</option>
+              <option>08:00</option><option>09:00</option><option>10:00</option>
+              <option>11:00</option><option>13:00</option><option>14:00</option>
+              <option>15:00</option><option>16:00</option><option>17:00</option>
+              <option>18:00</option>
+            </select>
+          </div>
         </div>
-        <div class="pix-amount" id="pixAmt">R$ 0,00</div>
-        <div class="pix-steps">
-          <div class="pix-step"><div class="pix-step-num">1</div><span>Abra seu banco e acesse o Pix</span></div>
-          <div class="pix-step"><div class="pix-step-num">2</div><span>Cole a chave e confirme o valor</span></div>
-          <div class="pix-step"><div class="pix-step-num">3</div><span>Envie o comprovante no WhatsApp para confirmar</span></div>
+        <div class="schedule-row">
+          <div class="schedule-field">
+            <label>🔧 Serviço</label>
+            <select id="schedService">
+              <option value="">Selecionar</option>
+              <option>Formatação / Windows</option>
+              <option>Upgrade (RAM/SSD)</option>
+              <option>Remoção de vírus</option>
+              <option>Limpeza interna</option>
+              <option>Troca de peça</option>
+              <option>Diagnóstico geral</option>
+            </select>
+          </div>
+          <div class="schedule-field">
+            <label>📦 Modalidade</label>
+            <select id="schedMode" onchange="toggleEndereco()">
+              <option value="">Selecionar</option>
+              <option>Levar ao técnico</option>
+              <option value="coleta">Coleta na residência</option>
+              <option>Remoto (online)</option>
+            </select>
+          </div>
         </div>
+
+        <!-- ENDEREÇO — aparece só quando Coleta selecionada -->
+        <div id="enderecoSection" style="display:none; margin-bottom:12px;">
+          <div style="background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.18); border-radius:8px; padding:9px 14px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+            <span style="font-size:14px;">🚗</span>
+            <p style="font-size:12px; color:rgba(200,230,255,0.6); line-height:1.4;">Retirada <strong style="color:#00d4ff;">gratuita</strong> até 3 km · R$ 4,50/km acima disso</p>
+          </div>
+          <div style="background:rgba(150,100,255,0.06); border:1px solid rgba(150,100,255,0.2); border-radius:10px; padding:12px 14px;">
+            <p style="font-size:11px; color:rgba(150,100,255,0.9); letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;">📍 Endereço para coleta</p>
+            <div style="margin-bottom:10px;">
+              <div class="schedule-field">
+                <label>Rua / Avenida</label>
+                <input type="text" id="schedRua" placeholder="Ex: Av. Paulista, 1000">
+              </div>
+            </div>
+            <div class="schedule-row" style="margin-bottom:10px;">
+              <div class="schedule-field">
+                <label>Bairro</label>
+                <input type="text" id="schedBairro" placeholder="Ex: Bela Vista">
+              </div>
+              <div class="schedule-field">
+                <label>Nº / Complemento</label>
+                <input type="text" id="schedNum" placeholder="Apto, bloco...">
+              </div>
+            </div>
+            <div class="schedule-row" style="margin-bottom:8px;">
+              <div class="schedule-field">
+                <label>Cidade</label>
+                <input type="text" id="schedCidade" placeholder="São Paulo">
+              </div>
+              <div class="schedule-field">
+                <label>CEP</label>
+                <input type="text" id="schedCep" placeholder="00000-000" maxlength="9" oninput="mascararCep(this); resetDistancia()">
+              </div>
+            </div>
+
+            <!-- Botão calcular -->
+            <button type="button" id="btnCalc" onclick="calcularDistancia()" style="width:100%;margin-top:4px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);border-radius:8px;color:#00d4ff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:9px;cursor:pointer;transition:background 0.2s;">
+              📍 Calcular distância automaticamente
+            </button>
+
+            <!-- Resultado -->
+            <div id="taxaBox" style="display:none; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2); border-radius:8px; padding:10px 14px; margin-top:8px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <p style="font-size:11px; color:rgba(200,230,255,0.4); text-transform:uppercase; letter-spacing:1px;">Taxa de coleta</p>
+                  <p id="taxaDesc" style="font-size:12px; color:rgba(200,230,255,0.45); margin-top:2px;"></p>
+                </div>
+                <p id="taxaValor" style="font-size:22px; font-family:'Rajdhani',sans-serif; font-weight:700;"></p>
+              </div>
+            </div>
+            <div id="taxaErro" style="display:none; background:rgba(255,80,80,0.08); border:1px solid rgba(255,80,80,0.2); border-radius:8px; padding:9px 12px; margin-top:8px;">
+              <p style="font-size:12px; color:rgba(255,150,150,0.8);">⚠️ CEP não encontrado. Verifique e tente novamente.</p>
+            </div>
+          </div>
+        </div>
+
+        <textarea class="schedule-obs" id="schedObs" placeholder="Observações (opcional): descreva o problema..."></textarea>
+        <button class="schedule-confirm" onclick="confirmarAgendamento()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.984-1.413A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.115l-.29-.173-3.004.852.867-2.931-.19-.3A7.96 7.96 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z"/></svg>
+          Confirmar pelo WhatsApp
+        </button>
       </div>
     </div>
 
-    <!-- CART FOOTER -->
-    <div class="cart-footer">
-      <div class="tot-row"><span class="tot-label">Subtotal</span><span class="tot-val" id="subtotalDisp">R$ 0,00</span></div>
-      <div class="tot-row"><span class="tot-label">Frete</span><span class="tot-val" id="freteDisp" style="color:var(--dim);">A calcular</span></div>
-      <div class="tot-row" style="margin-top:8px;"><span style="font-size:14px;font-weight:500;">Total</span><span class="tot-grand" id="totalDisp">R$ 0,00</span></div>
-      <button class="next-btn btn-blue" id="nextBtn" onclick="nextStep()">Continuar →</button>
-      <button class="back-btn" id="backBtn" onclick="prevStep()" style="display:none;">← Voltar</button>
+    <!-- COMUNIDADE -->
+    <a href="https://chat.whatsapp.com/BC5ioEOayyA5zvqwGwhmd1" class="link-btn" target="_blank" rel="noopener" style="animation-delay:0.46s;">
+      <div class="btn-icon whatsapp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25d366">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.984-1.413A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 01-4.065-1.115l-.29-.173-3.004.852.867-2.931-.19-.3A7.96 7.96 0 014 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8z"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">Comunidade — Peças & Equipamentos</span>
+        <span class="btn-sub">HD · SSD · RAM · Carregadores · Notebooks</span>
+      </div>
+      <span class="btn-arrow">→</span>
+    </a>
+
+    <!-- APRESENTAÇÃO -->
+    <a href="https://wa.me/5511920919983?text=Ol%C3%A1+Denis%21+Vi+seu+site+e+gostaria+de+conhecer+melhor+seus+servi%C3%A7os.+Pode+me+enviar+a+apresenta%C3%A7%C3%A3o%3F" class="link-btn" target="_blank" rel="noopener" style="animation-delay:0.5s;">
+      <div class="btn-icon apresentacao">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="3" width="20" height="14" rx="2" stroke="#ffb432" stroke-width="1.8"/>
+          <path d="M8 21h8M12 17v4" stroke="#ffb432" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M10 8l2 2 4-4" stroke="#ffb432" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="btn-text">
+        <span class="btn-label">Ver Apresentação</span>
+        <span class="btn-sub">Receba o portfólio no WhatsApp</span>
+      </div>
+      <span class="btn-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- SERVICES SECTION -->
+  <p class="services-title" id="servicos">Serviços</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">💻</span>
+      <span class="service-name">Formatação</span>
+      <span class="service-desc">Reinstalação limpa do Windows</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">⚡</span>
+      <span class="service-name">Upgrade</span>
+      <span class="service-desc">RAM, SSD, processador</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🛡️</span>
+      <span class="service-name">Remoção de Vírus</span>
+      <span class="service-desc">Limpeza e proteção completa</span>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔧</span>
+      <span class="service-name">Manutenção</span>
+      <span class="service-desc">Limpeza interna e térmica</span>
     </div>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
+  <!-- FOOTER -->
+  <div class="footer">
+    <span class="footer-phone">11 92091-9983</span>
+    <span class="footer-label">Atendimento rápido · Orçamento no direct</span>
+    <p class="footer-credit">Denis Fernandes Suporte & Upgrade · São Paulo</p>
+  </div>
+
+</div>
 
 <script>
-const CATS={'todos':'Todos','ssd-hd':'SSD / HD','ram':'Memória RAM','carregador':'Carregadores','notebook':'Notebooks','teclado-mouse':'Teclado e Mouse','acessorio':'Acessórios'};
-const PRODUTOS=[
-  {id:1,cat:'ssd-hd',nome:'SSD Kingston 240GB SATA',spec:'Leitura: 500MB/s · SATA III',preco:129.90,precoAntigo:159.90,badge:'novo',icon:'💾'},
-  {id:2,cat:'ssd-hd',nome:'SSD Kingston 480GB SATA',spec:'Leitura: 500MB/s · SATA III',preco:189.90,precoAntigo:null,badge:'novo',icon:'💾'},
-  {id:3,cat:'ssd-hd',nome:'HD Seagate 500GB 2.5"',spec:'5400RPM · Notebook/Desktop',preco:89.90,precoAntigo:119.90,badge:'usado',icon:'🗄️'},
-  {id:4,cat:'ssd-hd',nome:'HD WD Blue 1TB 3.5"',spec:'7200RPM · Desktop',preco:149.90,precoAntigo:null,badge:'novo',icon:'🗄️'},
-  {id:5,cat:'ssd-hd',nome:'SSD M.2 NVMe 256GB',spec:'Leitura: 2400MB/s · PCIe',preco:219.90,precoAntigo:269.90,badge:'oferta',icon:'💾'},
-  {id:6,cat:'ram',nome:'Memória RAM 4GB DDR3',spec:'1600MHz · Notebook',preco:59.90,precoAntigo:79.90,badge:'usado',icon:'🧠'},
-  {id:7,cat:'ram',nome:'Memória RAM 8GB DDR3',spec:'1600MHz · Desktop/Notebook',preco:99.90,precoAntigo:null,badge:'novo',icon:'🧠'},
-  {id:8,cat:'ram',nome:'Memória RAM 8GB DDR4',spec:'2666MHz · Desktop',preco:129.90,precoAntigo:149.90,badge:'novo',icon:'🧠'},
-  {id:9,cat:'ram',nome:'Kit 16GB DDR4 (2x8GB)',spec:'3200MHz · Dual Channel',preco:219.90,precoAntigo:269.90,badge:'oferta',icon:'🧠'},
-  {id:10,cat:'carregador',nome:'Carregador Universal 19V',spec:'65W · HP/Dell/Acer',preco:89.90,precoAntigo:109.90,badge:'novo',icon:'🔌'},
-  {id:11,cat:'carregador',nome:'Carregador USB-C 65W',spec:'PD 3.0 · Universal Tipo-C',preco:119.90,precoAntigo:null,badge:'novo',icon:'🔌'},
-  {id:12,cat:'carregador',nome:'Carregador Lenovo 20V',spec:'65W · Pino quadrado',preco:79.90,precoAntigo:99.90,badge:'novo',icon:'🔌'},
-  {id:13,cat:'notebook',nome:'Notebook Dell Inspiron 15',spec:'i5 8ª · 8GB · SSD 256GB · Win11',preco:1490,precoAntigo:1890,badge:'usado',icon:'💻'},
-  {id:14,cat:'notebook',nome:'Notebook Lenovo IdeaPad',spec:'i3 10ª · 8GB · SSD 256GB',preco:1290,precoAntigo:null,badge:'usado',icon:'💻'},
-  {id:15,cat:'notebook',nome:'Notebook Acer Aspire',spec:'i5 7ª · 8GB · HD 1TB',preco:1090,precoAntigo:1390,badge:'oferta',icon:'💻'},
-  {id:16,cat:'teclado-mouse',nome:'Teclado USB ABNT2',spec:'Membrana · Padrão BR',preco:39.90,precoAntigo:null,badge:'novo',icon:'⌨️'},
-  {id:17,cat:'teclado-mouse',nome:'Mouse USB Óptico 1000DPI',spec:'Scroll · 3 botões',preco:29.90,precoAntigo:39.90,badge:'novo',icon:'🖱️'},
-  {id:18,cat:'teclado-mouse',nome:'Kit Teclado + Mouse USB',spec:'Combo ABNT2',preco:59.90,precoAntigo:79.90,badge:'oferta',icon:'🖥️'},
-  {id:19,cat:'acessorio',nome:'Pasta Térmica Implastec 3g',spec:'Alta condutividade',preco:12.90,precoAntigo:null,badge:'novo',icon:'🧪'},
-  {id:20,cat:'acessorio',nome:'Cabo HDMI 1.8m',spec:'Full HD / 4K · 2.0',preco:24.90,precoAntigo:34.90,badge:'novo',icon:'🔗'},
-  {id:21,cat:'acessorio',nome:'Hub USB 4 Portas',spec:'USB 3.0 · Led indicador',preco:49.90,precoAntigo:null,badge:'novo',icon:'🔌'},
-  {id:22,cat:'acessorio',nome:'Cooler para Notebook',spec:'Base refrigerada USB',preco:79.90,precoAntigo:99.90,badge:'novo',icon:'❄️'},
-];
+  // Set min date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('schedDate').min = today;
 
-let cart=[],currentCat='todos',searchTerm='',step=1;
-
-function renderProducts(){
-  const grid=document.getElementById('productsGrid');
-  const filtered=PRODUTOS.filter(p=>(currentCat==='todos'||p.cat===currentCat)&&(!searchTerm||p.nome.toLowerCase().includes(searchTerm)||p.spec.toLowerCase().includes(searchTerm)));
-  document.getElementById('sectionTitle').textContent=searchTerm?`Busca: "${searchTerm}"`:CATS[currentCat];
-  document.getElementById('sectionCount').textContent=`${filtered.length} produto${filtered.length!==1?'s':''}`;
-  if(!filtered.length){grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--dim)"><div style="font-size:48px;margin-bottom:16px">🔍</div><p>Nenhum produto encontrado</p></div>`;return;}
-  grid.innerHTML=filtered.map(p=>`
-    <div class="product-card">
-      <div class="product-img"><span>${p.icon}</span><span class="product-badge badge-${p.badge}">${p.badge}</span></div>
-      <div class="product-info">
-        <span class="product-cat">${CATS[p.cat]}</span>
-        <p class="product-name">${p.nome}</p>
-        <p class="product-spec">${p.spec}</p>
-        <div class="product-footer">
-          <div>${p.precoAntigo?`<span class="product-price-old">R$ ${p.precoAntigo.toFixed(2).replace('.',',')}</span>`:''}<span class="product-price">R$ ${p.preco.toFixed(2).replace('.',',')}</span></div>
-          <button class="add-btn" onclick="addToCart(${p.id})">+</button>
-        </div>
-      </div>
-    </div>`).join('');
-}
-function filterCat(cat,btn){currentCat=cat;searchTerm='';document.getElementById('searchInput').value='';document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderProducts();}
-function searchProducts(){searchTerm=document.getElementById('searchInput').value.toLowerCase().trim();currentCat='todos';document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelector('.nav-btn').classList.add('active');renderProducts();}
-
-function addToCart(id){const p=PRODUTOS.find(x=>x.id===id),ex=cart.find(x=>x.id===id);if(ex)ex.qty++;else cart.push({...p,qty:1});updateBadge();toast(`✓ ${p.nome} adicionado!`);}
-function removeItem(id){cart=cart.filter(x=>x.id!==id);updateBadge();renderStep1();}
-function changeQty(id,d){const it=cart.find(x=>x.id===id);if(!it)return;it.qty+=d;if(it.qty<=0)removeItem(id);else{updateBadge();renderStep1();}}
-function updateBadge(){document.getElementById('cartBadge').textContent=cart.reduce((s,x)=>s+x.qty,0);}
-function getSub(){return cart.reduce((s,x)=>s+x.preco*x.qty,0);}
-function openCart(){document.getElementById('cartOverlay').classList.add('open');goStep(1);}
-function closeCart(){document.getElementById('cartOverlay').classList.remove('open');}
-function closeCartOutside(e){if(e.target===document.getElementById('cartOverlay'))closeCart();}
-
-function goStep(n){
-  step=n;
-  ['step1','step2','step3'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i+1===n));
-  ['tab1','tab2','tab3'].forEach((id,i)=>{const el=document.getElementById(id);el.classList.remove('active','done');if(i+1===n)el.classList.add('active');else if(i+1<n)el.classList.add('done');});
-  document.getElementById('backBtn').style.display=n>1?'block':'none';
-  const nb=document.getElementById('nextBtn');
-  if(n===1){nb.textContent='Continuar →';nb.className='next-btn btn-blue';}
-  else if(n===2){nb.textContent='Ir para Pagamento →';nb.className='next-btn btn-blue';}
-  else{nb.textContent='📲 Confirmar pelo WhatsApp';nb.className='next-btn btn-green';}
-  const titles=['🛒 Carrinho','📦 Dados de Entrega','💳 Pagamento'];
-  document.getElementById('cartTitle').textContent=titles[n-1];
-  if(n===1)renderStep1();
-  if(n===3)renderStep3();
-  updateTotals();
-}
-function nextStep(){
-  if(step===1){if(!cart.length){toast('⚠️ Adicione produtos ao carrinho!');return;}goStep(2);}
-  else if(step===2){if(!validateStep2())return;goStep(3);}
-  else{enviarPedido();}
-}
-function prevStep(){if(step>1)goStep(step-1);}
-
-function renderStep1(){
-  const el=document.getElementById('itemsList'),em=document.getElementById('emptyMsg');
-  if(!cart.length){el.innerHTML='';em.style.display='block';return;}
-  em.style.display='none';
-  el.innerHTML=cart.map(it=>`
-    <div class="cart-item">
-      <div class="ci-icon">${it.icon}</div>
-      <div class="ci-info">
-        <p class="ci-name">${it.nome}</p>
-        <p class="ci-price">R$ ${(it.preco*it.qty).toFixed(2).replace('.',',')}</p>
-        <div class="ci-controls">
-          <button class="qty-btn" onclick="changeQty(${it.id},-1)">−</button>
-          <span class="qty-num">${it.qty}</span>
-          <button class="qty-btn" onclick="changeQty(${it.id},1)">+</button>
-          <button class="rm-btn" onclick="removeItem(${it.id})">🗑 remover</button>
-        </div>
-      </div>
-    </div>`).join('');
-  updateTotals();
-}
-
-function toggleMod(){
-  const m=document.getElementById('fMod').value;
-  document.getElementById('secSedex').style.display=m==='sedex'?'block':'none';
-  document.getElementById('secRetirada').style.display=m==='retirada'?'block':'none';
-  document.getElementById('freteDisp').textContent=m==='retirada'?'Grátis':'A calcular';
-}
-
-function mCep(el){let v=el.value.replace(/\D/g,'').slice(0,8);if(v.length>5)v=v.slice(0,5)+'-'+v.slice(5);el.value=v;}
-
-async function buscarCep(){
-  const cep=document.getElementById('fCep').value.replace(/\D/g,'');
-  if(cep.length!==8){toast('⚠️ CEP inválido');return;}
-  toast('🔍 Buscando...');
-  try{
-    const r=await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const d=await r.json();
-    if(d.erro){toast('⚠️ CEP não encontrado');return;}
-    document.getElementById('fRua').value=d.logradouro||'';
-    document.getElementById('fBairro').value=d.bairro||'';
-    document.getElementById('fCidade').value=`${d.localidade||''} / ${d.uf||''}`;
-    toast('✓ Endereço preenchido!');
-  }catch(e){toast('⚠️ Erro ao buscar CEP');}
-}
-
-function validateStep2(){
-  const nome=document.getElementById('fNome').value.trim();
-  const wpp=document.getElementById('fWpp').value.trim();
-  const mod=document.getElementById('fMod').value;
-  if(!nome){toast('⚠️ Informe o nome');return false;}
-  if(!wpp){toast('⚠️ Informe o WhatsApp');return false;}
-  if(!mod){toast('⚠️ Selecione a modalidade');return false;}
-  if(mod==='sedex'&&!document.getElementById('fCep').value.trim()){toast('⚠️ Informe o CEP');return false;}
-  return true;
-}
-
-function renderStep3(){
-  const sub=getSub();
-  const mod=document.getElementById('fMod').value;
-  document.getElementById('orderSum').innerHTML=`
-    <div class="os-title">Resumo do pedido</div>
-    ${cart.map(it=>`<div class="os-item"><span>${it.nome} (x${it.qty})</span><span>R$ ${(it.preco*it.qty).toFixed(2).replace('.',',')}</span></div>`).join('')}
-    <div class="os-total"><span>Subtotal</span><span>R$ ${sub.toFixed(2).replace('.',',')}</span></div>
-    <div class="os-item" style="margin-top:4px;"><span>Frete</span><span>${mod==='retirada'?'Grátis':'A calcular'}</span></div>
-  `;
-  document.getElementById('pixAmt').textContent=`R$ ${sub.toFixed(2).replace('.',',')}`;
-}
-
-function updateTotals(){
-  const sub=getSub();
-  document.getElementById('subtotalDisp').textContent=`R$ ${sub.toFixed(2).replace('.',',')}`;
-  document.getElementById('totalDisp').textContent=`R$ ${sub.toFixed(2).replace('.',',')}`;
-}
-
-function enviarPedido(){
-  const nome=document.getElementById('fNome').value.trim();
-  const wpp=document.getElementById('fWpp').value.trim();
-  const cpf=document.getElementById('fCpf').value.trim();
-  const mod=document.getElementById('fMod').value;
-  const obs=document.getElementById('fObs').value.trim();
-  const sub=getSub();
-  let msg=`🛒 *NOVO PEDIDO — UpTech Store*\n\n`;
-  msg+=`👤 *Cliente:* ${nome}\n📱 *WhatsApp:* ${wpp}\n`;
-  if(cpf)msg+=`🪪 *CPF:* ${cpf}\n`;
-  msg+=`\n🛍️ *Produtos:*\n`;
-  cart.forEach(it=>{msg+=`• ${it.nome} (x${it.qty}) — R$ ${(it.preco*it.qty).toFixed(2).replace('.',',')}\n`;});
-  msg+=`\n💰 *Subtotal:* R$ ${sub.toFixed(2).replace('.',',')}\n`;
-  if(mod==='sedex'){
-    const cep=document.getElementById('fCep').value.trim();
-    const rua=document.getElementById('fRua').value.trim();
-    const num=document.getElementById('fNum').value.trim();
-    const comp=document.getElementById('fComp').value.trim();
-    const bairro=document.getElementById('fBairro').value.trim();
-    const cidade=document.getElementById('fCidade').value.trim();
-    msg+=`🚚 *Entrega:* Sedex\n📍 *Endereço:* ${rua}${num?', '+num:''}${comp?' - '+comp:''}, ${bairro}, ${cidade}, CEP: ${cep}\n`;
-  } else {
-    msg+=`📍 *Modalidade:* Retirada no Morumbi/SP\n`;
+  function toggleAgendamento() {
+    const panel = document.getElementById('schedulePanel');
+    const btn = document.getElementById('agendarBtn');
+    const arrow = document.getElementById('agendarArrow');
+    const open = panel.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    arrow.textContent = open ? '✕' : '↓';
   }
-  msg+=`\n💳 *Pagamento:* Pix — chave: 11920919983\n`;
-  if(obs)msg+=`\n💬 *Obs:* ${obs}\n`;
-  msg+=`\n✅ Em breve enviarei o comprovante!`;
-  window.open(`https://wa.me/5511920919983?text=${encodeURIComponent(msg)}`,'_blank');
-}
 
-function copiarPix(){navigator.clipboard.writeText('11920919983').then(()=>toast('✓ Chave Pix copiada!')).catch(()=>toast('Chave: 11920919983'));}
+  function toggleEndereco() {
+    const mode = document.getElementById('schedMode').value;
+    const sec = document.getElementById('enderecoSection');
+    sec.style.display = mode === 'coleta' ? 'block' : 'none';
+    if (mode !== 'coleta') resetDistancia();
+  }
 
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+  function mascararCep(el) {
+    let v = el.value.replace(/\D/g, '').slice(0, 8);
+    if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5);
+    el.value = v;
+  }
 
-renderProducts();
+  function resetDistancia() {
+    document.getElementById('taxaBox').style.display = 'none';
+    document.getElementById('taxaErro').style.display = 'none';
+    window._kmCalculado = null;
+    window._taxaCalculada = null;
+  }
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+    return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)) * 10) / 10;
+  }
+
+  async function calcularDistancia() {
+    const cep = document.getElementById('schedCep').value.replace(/\D/g, '');
+    const btn = document.getElementById('btnCalc');
+    if (cep.length !== 8) { alert('Digite um CEP válido com 8 dígitos.'); return; }
+
+    btn.textContent = '⏳ Calculando...';
+    btn.disabled = true;
+    resetDistancia();
+
+    // Morumbi — R. Leandro Teixeira, 115
+    const LAT_DENIS = -23.6097, LON_DENIS = -46.7172;
+
+    // Lookup por prefixo de CEP (5 dígitos) para São Paulo e Grande SP
+    const cepCoords = {
+      // São Paulo Capital — Centro
+      '01001':[-23.5489,-46.6388],'01002':[-23.5489,-46.6388],'01010':[-23.5429,-46.6350],
+      '01020':[-23.5429,-46.6440],'01100':[-23.5380,-46.6300],'01200':[-23.5280,-46.6420],
+      '01300':[-23.5400,-46.6550],'01400':[-23.5500,-46.6600],'01500':[-23.5380,-46.6180],
+      // Pinheiros / Vila Madalena / Itaim
+      '01600':[-23.5580,-46.6820],'01700':[-23.5530,-46.6900],'01800':[-23.5200,-46.6900],
+      '01900':[-23.5150,-46.6700],'02000':[-23.5050,-46.6239],'02100':[-23.5050,-46.6400],
+      '02200':[-23.4900,-46.6300],'02300':[-23.4700,-46.6100],'02400':[-23.4800,-46.6600],
+      '02500':[-23.4900,-46.6800],'02600':[-23.5100,-46.7100],'02700':[-23.5200,-46.7200],
+      '02800':[-23.4600,-46.7000],'02900':[-23.4700,-46.7200],'03000':[-23.5297,-46.5628],
+      '03100':[-23.5400,-46.5800],'03200':[-23.5550,-46.5950],'03300':[-23.5350,-46.6200],
+      '03400':[-23.5200,-46.5800],'03500':[-23.5100,-46.5400],'03600':[-23.5000,-46.5200],
+      '03700':[-23.5100,-46.4900],'03800':[-23.5300,-46.4700],'03900':[-23.5200,-46.4500],
+      '04000':[-23.5900,-46.6350],'04100':[-23.5950,-46.6200],'04200':[-23.6050,-46.6100],
+      '04300':[-23.6000,-46.6050],'04400':[-23.6200,-46.6600],'04500':[-23.5820,-46.6740],
+      '04600':[-23.6000,-46.6850],'04700':[-23.6200,-46.7000],'04800':[-23.6400,-46.6800],
+      '04900':[-23.6550,-46.6980],'05000':[-23.5650,-46.6980],'05100':[-23.5380,-46.6800],
+      '05200':[-23.5250,-46.7050],'05300':[-23.5400,-46.7100],'05400':[-23.5600,-46.7200],
+      '05500':[-23.5780,-46.7100],'05600':[-23.5950,-46.7100],'05601':[-23.5950,-46.7100],
+      '05610':[-23.6000,-46.7150],'05620':[-23.6050,-46.7150],'05630':[-23.6080,-46.7160],
+      '05640':[-23.6090,-46.7170],'05650':[-23.6097,-46.7172],'05660':[-23.6097,-46.7172],
+      '05661':[-23.6097,-46.7172],'05662':[-23.6097,-46.7172],'05663':[-23.6097,-46.7172],
+      '05670':[-23.6150,-46.7200],'05680':[-23.6200,-46.7250],'05690':[-23.6250,-46.7300],
+      '05700':[-23.6300,-46.7200],'05800':[-23.6400,-46.7100],'05900':[-23.6500,-46.7000],
+      // Zona Sul
+      '04001':[-23.5900,-46.6350],'04010':[-23.6050,-46.6500],'04020':[-23.6200,-46.6400],
+      '04030':[-23.6050,-46.6250],'04040':[-23.6100,-46.6200],'04050':[-23.5950,-46.6350],
+      '05001':[-23.5650,-46.6980],'06000':[-23.5322,-46.7919],
+      // Butantã / Vila Andrade / Jardim das Imbuias
+      '05500':[-23.5780,-46.7100],'05750':[-23.6350,-46.7300],'05760':[-23.6400,-46.7350],
+      // Grajaú / Interlagos / Cidade Dutra
+      '04900':[-23.6550,-46.6980],'04800':[-23.7050,-46.6900],'04700':[-23.6800,-46.6600],
+      // Santo Amaro / Campo Grande
+      '04700':[-23.6550,-46.7050],'04600':[-23.6450,-46.7300],
+      // Taboão da Serra
+      '06750':[-23.6025,-46.7572],'06760':[-23.6050,-46.7550],'06770':[-23.6100,-46.7600],
+      '06780':[-23.6150,-46.7650],'06790':[-23.6200,-46.7700],
+      // Osasco
+      '06000':[-23.5322,-46.7919],'06010':[-23.5280,-46.7900],'06020':[-23.5350,-46.7850],
+      '06030':[-23.5400,-46.7800],'06040':[-23.5180,-46.7920],'06050':[-23.5150,-46.7880],
+      '06060':[-23.5100,-46.7950],'06070':[-23.5050,-46.8000],'06080':[-23.5080,-46.8050],
+      '06090':[-23.5200,-46.8100],'06100':[-23.5300,-46.8050],'06110':[-23.5350,-46.8000],
+      // Barueri / Alphaville
+      '06400':[-23.5050,-46.8761],'06410':[-23.5100,-46.8700],'06420':[-23.5150,-46.8650],
+      '06430':[-23.5200,-46.8600],'06440':[-23.5250,-46.8550],'06450':[-23.5050,-46.8900],
+      '06460':[-23.4900,-46.8500],'06470':[-23.4950,-46.8700],'06480':[-23.4800,-46.8600],
+      // Carapicuíba
+      '06300':[-23.5228,-46.8358],'06310':[-23.5180,-46.8300],'06320':[-23.5250,-46.8400],
+      '06330':[-23.5300,-46.8450],'06340':[-23.5100,-46.8250],'06350':[-23.5350,-46.8500],
+      // Cotia
+      '06700':[-23.6031,-46.9197],'06710':[-23.6100,-46.9100],'06720':[-23.6200,-46.9000],
+      '06730':[-23.6300,-46.8900],'06740':[-23.5900,-46.9300],
+      // Embu das Artes
+      '06800':[-23.6489,-46.8508],'06810':[-23.6400,-46.8450],'06820':[-23.6550,-46.8550],
+      '06830':[-23.6600,-46.8600],'06840':[-23.6700,-46.8700],'06850':[-23.6800,-46.8600],
+      // Santana de Parnaíba / Jandira
+      '06530':[-23.5253,-46.9028],'06540':[-23.5200,-46.9100],'06550':[-23.5150,-46.9200],
+      '06560':[-23.4444,-46.9178],'06570':[-23.4500,-46.9100],
+      // Guarulhos
+      '07000':[-23.4543,-46.5333],'07010':[-23.4600,-46.5400],'07020':[-23.4650,-46.5450],
+      '07030':[-23.4700,-46.5500],'07040':[-23.4750,-46.5550],'07050':[-23.4800,-46.5600],
+      '07100':[-23.4500,-46.5200],'07200':[-23.4400,-46.5100],'07300':[-23.4300,-46.5000],
+      '07400':[-23.4200,-46.4900],'07500':[-23.4100,-46.4800],'07600':[-23.4200,-46.5500],
+      '07700':[-23.4300,-46.5400],'07800':[-23.4400,-46.5300],'07900':[-23.4500,-46.5400],
+      // ABC Paulista
+      '09000':[-23.6639,-46.5383],'09010':[-23.6700,-46.5400],'09020':[-23.6750,-46.5450],
+      '09030':[-23.6800,-46.5500],'09040':[-23.6850,-46.5550],'09050':[-23.6900,-46.5600],
+      '09100':[-23.7139,-46.5222],'09110':[-23.7200,-46.5280],'09120':[-23.7250,-46.5300],
+      '09130':[-23.7300,-46.5350],'09140':[-23.7350,-46.5400],'09150':[-23.7400,-46.5450],
+      '09200':[-23.6939,-46.5650],'09210':[-23.7000,-46.5700],'09220':[-23.7050,-46.5750],
+      '09300':[-23.7108,-46.4122],'09310':[-23.7150,-46.4200],'09320':[-23.7200,-46.4300],
+      '09400':[-23.6678,-46.4614],'09410':[-23.6700,-46.4700],'09420':[-23.6750,-46.4800],
+      '09500':[-23.6861,-46.6228],'09510':[-23.6900,-46.6300],'09520':[-23.6950,-46.6350],
+      // Mogi das Cruzes / Suzano
+      '08600':[-23.5228,-46.1897],'08700':[-23.5428,-46.3100],'08800':[-23.4867,-46.3486],
+      // Default SP capital
+      '08000':[-23.5505,-46.6333],'08100':[-23.5505,-46.5333],'08200':[-23.5505,-46.4833],
+      '08300':[-23.5005,-46.4333],'08400':[-23.5505,-46.3833],'08500':[-23.5505,-46.3333],
+    };
+
+    let lat1 = null, lon1 = null;
+    const prefix5 = cep.slice(0,5);
+    const prefix4 = cep.slice(0,4);
+    const prefix3 = cep.slice(0,3);
+
+    // 1. Busca por prefixo 5 dígitos
+    if (cepCoords[prefix5]) { [lat1, lon1] = cepCoords[prefix5]; }
+    else {
+      // Busca por prefixo mais próximo (4 ou 3 dígitos)
+      const chave = Object.keys(cepCoords).find(k => k.startsWith(prefix4)) ||
+                    Object.keys(cepCoords).find(k => k.startsWith(prefix3));
+      if (chave) [lat1, lon1] = cepCoords[chave];
+    }
+
+    // 2. Se não achou na tabela, tenta ViaCEP para pegar a cidade
+    if (!lat1) {
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (r.ok) {
+          const d = await r.json();
+          if (!d.erro) {
+            if (d.logradouro && !document.getElementById('schedRua').value) document.getElementById('schedRua').value = d.logradouro;
+            if (d.bairro && !document.getElementById('schedBairro').value) document.getElementById('schedBairro').value = d.bairro;
+            if (d.localidade && !document.getElementById('schedCidade').value) document.getElementById('schedCidade').value = d.localidade;
+            // Fallback por cidade
+            const cidadeCoords = {
+              'são paulo':[-23.5505,-46.6333],'guarulhos':[-23.4543,-46.5333],
+              'osasco':[-23.5322,-46.7919],'barueri':[-23.5050,-46.8761],
+              'carapicuíba':[-23.5228,-46.8358],'cotia':[-23.6031,-46.9197],
+              'taboão da serra':[-23.6025,-46.7572],'embu das artes':[-23.6489,-46.8508],
+              'santo andré':[-23.6639,-46.5383],'são bernardo do campo':[-23.6939,-46.5650],
+              'diadema':[-23.6861,-46.6228],'mauá':[-23.6678,-46.4614],
+              'ribeirão pires':[-23.7108,-46.4122],'suzano':[-23.5428,-46.3100],
+              'mogi das cruzes':[-23.5228,-46.1897],'santana de parnaíba':[-23.4444,-46.9178],
+              'jandira':[-23.5253,-46.9028],'itapevi':[-23.5486,-46.9356],
+            };
+            const cidade = (d.localidade||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            const match = Object.keys(cidadeCoords).find(k => cidade.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
+            if (match) [lat1, lon1] = cidadeCoords[match];
+          }
+        }
+      } catch(e) {}
+    } else {
+      // Preenche endereço via ViaCEP mesmo se já tiver coords
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (r.ok) {
+          const d = await r.json();
+          if (!d.erro) {
+            if (d.logradouro && !document.getElementById('schedRua').value) document.getElementById('schedRua').value = d.logradouro;
+            if (d.bairro && !document.getElementById('schedBairro').value) document.getElementById('schedBairro').value = d.bairro;
+            if (d.localidade && !document.getElementById('schedCidade').value) document.getElementById('schedCidade').value = d.localidade;
+          }
+        }
+      } catch(e) {}
+    }
+
+    if (!lat1) {
+      document.getElementById('taxaErro').style.display = 'block';
+      btn.textContent = '📍 Recalcular distância';
+      btn.disabled = false;
+      return;
+    }
+
+    const km = haversine(lat1, lon1, LAT_DENIS, LON_DENIS);
+    window._kmCalculado = km;
+    const KM_GRATIS = 3, TAXA = 4.5;
+    const taxa = km <= KM_GRATIS ? 0 : Math.round((km - KM_GRATIS) * TAXA * 100) / 100;
+    window._taxaCalculada = taxa;
+
+    document.getElementById('taxaDesc').textContent = km <= KM_GRATIS
+      ? `${km} km — coleta gratuita até 3 km`
+      : `${km} km · R$ 4,50/km após 3 km`;
+    document.getElementById('taxaValor').textContent = taxa === 0 ? 'Grátis' : `R$ ${taxa.toFixed(2).replace('.', ',')}`;
+    document.getElementById('taxaValor').style.color = taxa === 0 ? '#00ff99' : '#00d4ff';
+    document.getElementById('taxaBox').style.display = 'block';
+
+    btn.textContent = '📍 Recalcular distância';
+    btn.disabled = false;
+  }
+
+  function confirmarAgendamento() {
+    const date    = document.getElementById('schedDate').value;
+    const time    = document.getElementById('schedTime').value;
+    const service = document.getElementById('schedService').value;
+    const mode    = document.getElementById('schedMode').value;
+    const obs     = document.getElementById('schedObs').value.trim();
+
+    if (!date || !time || !service || !mode) {
+      alert('Por favor, preencha data, horário, serviço e modalidade.');
+      return;
+    }
+    if (mode === 'coleta' && window._kmCalculado == null) {
+      alert('Por favor, calcule a distância antes de confirmar.');
+      return;
+    }
+
+    const [y, m, d] = date.split('-');
+    const dateFormatted = `${d}/${m}/${y}`;
+    const modeLabel = mode === 'coleta' ? 'Coleta na residência' : mode;
+
+    let msg = `Olá Denis! Gostaria de agendar um atendimento:\n\n`;
+    msg += `📅 *Data:* ${dateFormatted}\n`;
+    msg += `🕐 *Horário:* ${time}\n`;
+    msg += `🔧 *Serviço:* ${service}\n`;
+    msg += `📦 *Modalidade:* ${modeLabel}`;
+
+    if (mode === 'coleta') {
+      const rua    = document.getElementById('schedRua').value.trim();
+      const bairro = document.getElementById('schedBairro').value.trim();
+      const num    = document.getElementById('schedNum').value.trim();
+      const cidade = document.getElementById('schedCidade').value.trim() || 'São Paulo';
+      const cep    = document.getElementById('schedCep').value.trim();
+      if (rua) msg += `\n\n📍 *Endereço:* ${rua}${num ? ', ' + num : ''} — ${bairro} — ${cidade}`;
+      if (cep) msg += ` — CEP: ${cep}`;
+      const km   = window._kmCalculado;
+      const taxa = window._taxaCalculada;
+      msg += `\n📏 *Distância:* ${km} km`;
+      msg += taxa === 0 ? ` (coleta gratuita)` : `\n💳 *Taxa de coleta:* R$ ${taxa.toFixed(2).replace('.', ',')} (R$ 4,50/km após 3 km)`;    }
+
+    if (obs) msg += `\n\n💬 *Obs:* ${obs}`;
+    window.open(`https://wa.me/5511920919983?text=${encodeURIComponent(msg)}`, '_blank');
+  }
 </script>
+
 </body>
 </html>
